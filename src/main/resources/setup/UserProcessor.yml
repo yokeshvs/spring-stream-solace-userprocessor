@@ -1,0 +1,110 @@
+components:
+  schemas:
+    User:
+      default: {}
+      $schema: 'http://json-schema.org/draft-07/schema'
+      examples:
+        - isValid: true
+          name: A green door
+          id: 1
+          email: test@mailinator.com
+      description: The root schema comprises the entire JSON document.
+      additionalProperties: true
+      type: object
+      title: The root schema
+      required:
+        - id
+        - name
+        - email
+        - isValid
+      properties:
+        isValid:
+          default: false
+          examples:
+            - true
+          description: An explanation about the purpose of this instance.
+          type: boolean
+          title: The isValid schema
+          $id: '#/properties/isValid'
+        name:
+          default: ''
+          examples:
+            - A green door
+          description: An explanation about the purpose of this instance.
+          type: string
+          title: The name schema
+          $id: '#/properties/name'
+        id:
+          default: 0
+          examples:
+            - 1
+          description: An explanation about the purpose of this instance.
+          type: integer
+          title: The id schema
+          $id: '#/properties/id'
+        email:
+          default: ''
+          examples:
+            - test@mailinator.com
+          description: An explanation about the purpose of this instance.
+          type: string
+          title: The email schema
+          $id: '#/properties/email'
+      $id: 'http://example.com/example.json'
+    Result:
+      default: {}
+      $schema: 'http://json-schema.org/draft-07/schema'
+      examples:
+        - isValid: true
+          email: test@mailinator.com
+      description: The root schema comprises the entire JSON document.
+      additionalProperties: true
+      type: object
+      title: The root schema
+      required:
+        - email
+        - isValid
+      properties:
+        isValid:
+          default: false
+          examples:
+            - true
+          description: An explanation about the purpose of this instance.
+          type: boolean
+          title: The isValid schema
+          $id: '#/properties/isValid'
+        email:
+          default: ''
+          examples:
+            - test@mailinator.com
+          description: An explanation about the purpose of this instance.
+          type: string
+          title: The email schema
+          $id: '#/properties/email'
+      $id: 'http://example.com/example.json'
+  messages:
+    user-services-user:
+      payload:
+        $ref: '#/components/schemas/User'
+      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
+      contentType: application/json
+    user-services-result:
+      payload:
+        $ref: '#/components/schemas/Result'
+      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
+      contentType: application/json
+channels:
+  yokesh-demo-email/user:
+    subscribe:
+      message:
+        $ref: '#/components/messages/user-services-user'
+  yokesh-demo-email/result:
+    publish:
+      message:
+        $ref: '#/components/messages/user-services-result'
+asyncapi: 2.0.0
+info:
+  x-application-class: unspecified
+  title: UserProcessor
+  x-view: provider
+  version: 0.0.1

@@ -1,0 +1,29 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: yokeshDemoEmailUserConsumer
+      bindings:
+        yokeshDemoEmailUserConsumer-in-0:
+          destination: yokesh-demo-email/user
+        yokeshDemoEmailUserConsumer-out-0:
+          destination: yokesh-demo-email/result
+solace:
+  java:
+    host: 'tcps://test.messaging.solace.cloud:55443'
+    msgVpn: yokesh-springone-service
+    clientUsername: solace-cloud-client
+    clientPassword: test
+logging:
+  level:
+    root: info
+    org:
+      springframework: info
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
